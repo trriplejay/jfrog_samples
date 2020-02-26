@@ -1,0 +1,39 @@
+resources:
+  - name: singleRepo_simple
+    type: GitRepo
+    configuration:
+      gitProvider: johns_bbs
+      path: ~johns/simpleserver
+      branches:
+        include: master
+
+pipelines:
+  - name: simple_pipe_simple
+    steps:
+      - name: first_step_simple
+        type: Bash
+        configuration:
+          inputResources:
+            - name: singleRepo_simple
+          runtime:
+            type: image
+            image:
+              custom:
+                name: docker.bintray.io/jfrog/pipelines-u18node
+                tag: 10.16.3
+                autoPull: false
+        execution:
+          onExecute:
+            - bash --version
+            - echo "pipeline source branch is - {{gitBranch}}"
+
+      - name: second_step_simple
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: first_step_simple
+        execution:
+          onExecute:
+            - echo "final step in the pipeline"
+
+
