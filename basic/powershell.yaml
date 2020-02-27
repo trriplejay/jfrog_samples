@@ -12,6 +12,7 @@ pipelines:
             - write-output "starting"
           onExecute:
             - write-output "hello world. executing..."
+            - write-output "foo is $foo or is it $env:foo ?"
           onSuccess:
             - write-output "we did it!"
           onFailure:
