@@ -5,8 +5,16 @@ pipelines:
         type: PowerShell
         configuration:
           nodePool: win-static
-          runtime:
-            type: host
+          environmentVariables:
+            foo: bar
         execution:
+          onStart:
+            - write-output "starting"
           onExecute:
-            - write-output "hello world"
+            - write-output "hello world. executing..."
+          onSuccess:
+            - write-output "we did it!"
+          onFailure:
+            - write-output "we've failed"
+          onComplete:
+            - write-output "mission complete"
