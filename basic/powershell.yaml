@@ -5,6 +5,8 @@ pipelines:
         type: PowerShell
         configuration:
           nodePool: win-static
+          runtime:
+            type: host
         execution:
           onExecute:
             - write-output "hello world"
