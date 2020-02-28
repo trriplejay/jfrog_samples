@@ -5,6 +5,7 @@ pipelines:
         type: PowerShell
         configuration:
           nodePool: win-static
+          affinityGroup: winffinity
           environmentVariables:
             foo: bar
         execution:
@@ -89,6 +90,7 @@ pipelines:
       - name: fail_onSuccess
         type: PowerShell
         configuration:
+          affinityGroup: winffinity
           inputSteps:
             - name: full_success
           nodePool: win-static
