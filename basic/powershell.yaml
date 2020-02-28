@@ -1,5 +1,5 @@
 pipelines:
-  - name: windows_pipe
+  - name: windows_basic_pipe
     steps:
       - name: full_success
         type: PowerShell
