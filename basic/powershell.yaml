@@ -1,7 +1,7 @@
 pipelines:
   - name: windows_pipe
     steps:
-      - name: test_success
+      - name: full_success
         type: PowerShell
         configuration:
           nodePool: win-static
@@ -20,11 +20,11 @@ pipelines:
           onComplete:
             - write-output "mission complete"
 
-      - name: test_failure
+      - name: fail_onExecute
         type: PowerShell
         configuration:
           inputSteps:
-            - name: test_success
+            - name: full_success
           nodePool: win-static
           environmentVariables:
             foo: bar
@@ -41,3 +41,91 @@ pipelines:
             - write-output "we've failed"
           onComplete:
             - write-output "mission complete"
+            
+      - name: fail_onStart
+        type: PowerShell
+        configuration:
+          inputSteps:
+            - name: full_success
+          nodePool: win-static
+          environmentVariables:
+            foo: bar
+        execution:
+          onStart:
+            - write-output "starting"
+            - bad stuff
+          onExecute:
+            - write-output "hello world. executing..."
+            - write-output "foo is $foo or is it $env:foo ?"
+          onSuccess:
+            - write-output "we did it!"
+          onFailure:
+            - write-output "we've failed"
+          onComplete:
+            - write-output "mission complete"
+
+      - name: fail_onFailure
+        type: PowerShell
+        configuration:
+          inputSteps:
+            - name: full_success
+          nodePool: win-static
+          environmentVariables:
+            foo: bar
+        execution:
+          onStart:
+            - write-output "starting"
+          onExecute:
+            - write-output "hello world. executing..."
+            - write-output "foo is $foo or is it $env:foo ?"
+          onSuccess:
+            - write-output "we did it!"
+          onFailure:
+            - write-output "we've failed"
+            - bad stuff
+          onComplete:
+            - write-output "mission complete"
+
+      - name: fail_onSuccess
+        type: PowerShell
+        configuration:
+          inputSteps:
+            - name: full_success
+          nodePool: win-static
+          environmentVariables:
+            foo: bar
+        execution:
+          onStart:
+            - write-output "starting"
+          onExecute:
+            - write-output "hello world. executing..."
+            - write-output "foo is $foo or is it $env:foo ?"
+          onSuccess:
+            - write-output "we did it!"
+            - bad stuff
+          onFailure:
+            - write-output "we've failed"
+          onComplete:
+            - write-output "mission complete"
+
+      - name: fail_onComplete
+        type: PowerShell
+        configuration:
+          inputSteps:
+            - name: full_success
+          nodePool: win-static
+          environmentVariables:
+            foo: bar
+        execution:
+          onStart:
+            - write-output "starting"
+          onExecute:
+            - write-output "hello world. executing..."
+            - write-output "foo is $foo or is it $env:foo ?"
+          onSuccess:
+            - write-output "we did it!"
+          onFailure:
+            - write-output "we've failed"
+          onComplete:
+            - write-output "mission complete"
+            - bad stuff
