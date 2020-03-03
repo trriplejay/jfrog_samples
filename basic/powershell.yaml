@@ -21,10 +21,19 @@ resources:
       
 pipelines:
   - name: win_one_little_step
+    configuration:
+      environmentVariables:
+        readOnly:
+          pipeline_readonly_env: "you can't change me!"
+        pipeline_writable_env: "I'm subject to change"
     steps:
       - name: test_envs
         type: PowerShell
         configuration:
+          environmentVariables:
+            readOnly:
+              step_readonly_env: "you can't change me!"
+            step_writable_env: "I'm subject to change"
           inputResources:
             - name: myImage
             - name: myRepo
@@ -40,8 +49,20 @@ pipelines:
             - write-output "current section. is it $current_script_section or $global:current_script_section"
             - write-output "lets take a look at the whole ENV.. its faster..."
             - get-variable
+            - try { $pipeline_readonly_env = "haha i changed you" } catch {$_}
+            - try { $pipeline_writeable_env = "haha i changed you" } catch {$_}            
+
+            - try { $step_readonly_env = "haha i changed you" } catch {$_}
+            - try { $step_writeable_env = "haha i changed you" } catch {$_}            
+            - get-variable
+            - try { $global:pipeline_writeable_env = "haha i changed you" } catch {$_}                        
+            - write-output "$global:pipeline_writeable_env"
+            - write-output "$pipeline_writeable_env"
+
           onSuccess:
             - write-output "current section. is it $current_script_section or $global:current_script_section"
+            - write-output "try to change a readonly variable"
+
           onFailure:
             - write-output "current section. is it $current_script_section or $global:current_script_section"
           onComplete:
