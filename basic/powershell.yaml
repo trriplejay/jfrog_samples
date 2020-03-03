@@ -31,8 +31,6 @@ pipelines:
         type: PowerShell
         configuration:
           environmentVariables:
-            readOnly:
-              step_readonly_env: "you can't change me!"
             step_writable_env: "I'm subject to change"
           inputResources:
             - name: myImage
@@ -51,8 +49,6 @@ pipelines:
             - get-variable
             - try { $pipeline_readonly_env = "haha i changed you" } catch {$_}
             - try { $pipeline_writeable_env = "haha i changed you" } catch {$_}            
-
-            - try { $step_readonly_env = "haha i changed you" } catch {$_}
             - try { $step_writeable_env = "haha i changed you" } catch {$_}            
             - get-variable
             - try { $global:pipeline_writeable_env = "haha i changed you" } catch {$_}                        
