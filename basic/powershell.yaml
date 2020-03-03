@@ -1,11 +1,5 @@
 
 pipelines:
-  - name: windows_one_big_step
-    steps:
-      - name: envtest
-        type: PowerShell
-        configuration:
-          - 
   - name: windows_basic_pipe
     steps:
       - name: full_success
