@@ -15,7 +15,7 @@ resources:
   - name: myBuildInfo
     type: BuildInfo
     configuration:
-      sourceArtifactory: myArt
+      sourceArtifactory: johns_art
       buildName: test
       buildNumber: 0
       
@@ -30,8 +30,8 @@ pipelines:
             - name: myRepo
             - name: myBuildInfo
           inputIntegrations:
-            - name: myGenericEnvs
-            - name: myArt
+            - name: johns_generic_envs
+            - name: johns_art
         execution:
           onStart:
             - write-output "image resource path is $res_myImage_resourcePath"
