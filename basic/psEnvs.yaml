@@ -29,14 +29,14 @@ pipelines:
             - name: myImage
             - name: myRepo
             - name: myBuildInfo
-          inputIntegrations:
+          integrations:
             - name: johns_generic_envs
             - name: johns_art
         execution:
           onStart:
             - write-output "image resource path is $res_myImage_resourcePath"
             - write-output "current section. is it $current_script_section or $global:current_script_section"
-          onExecution:
+          onExecute:
             - write-output "current section. is it $current_script_section or $global:current_script_section"
             - write-output "lets take a look at the whole ENV.. its faster..."
             - "dir env:"
