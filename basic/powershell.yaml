@@ -39,7 +39,7 @@ pipelines:
           onExecute:
             - write-output "current section. is it $current_script_section or $global:current_script_section"
             - write-output "lets take a look at the whole ENV.. its faster..."
-            - "dir env:"
+            - get-variable
           onSuccess:
             - write-output "current section. is it $current_script_section or $global:current_script_section"
           onFailure:
