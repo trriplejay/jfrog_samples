@@ -1,0 +1,49 @@
+resources:
+  - name: myImage
+    type: Image
+    configuration:
+      registry: tr_docker
+      imageName: trriplejay/simpleserver
+      imageTag: latest
+      
+  - name: myRepo
+    type: GitRepo
+    configuration:
+      path: trriplejay/jfrog_samples
+      gitProvider: tr_github
+    
+  - name: myBuildInfo
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: myArt
+      buildName: test
+      buildNumber: 0
+      
+pipelines:
+  - name: win_one_little_step
+    steps:
+      - name: test_envs
+        type: PowerShell
+        configuration:
+          inputResources:
+            - name: myImage
+            - name: myRepo
+            - name: myBuildInfo
+          inputIntegrations:
+            - name: myGenericEnvs
+            - name: myArt
+        execution:
+          onStart:
+            - write-output "image resource path is $res_myImage_resourcePath"
+           - write-output "current section. is it $current_script_section or $global:current_script_section"
+          onExecution:
+            - write-output "current section. is it $current_script_section or $global:current_script_section"
+            - write-output "lets take a look at the whole ENV.. its faster..."
+            - "dir env:"
+          onSuccess:
+            - write-output "current section. is it $current_script_section or $global:current_script_section"
+          onFailure:
+            - write-output "current section. is it $current_script_section or $global:current_script_section"
+          onComplete:
+            - write-output "current section. is it $current_script_section or $global:current_script_section"
+            
