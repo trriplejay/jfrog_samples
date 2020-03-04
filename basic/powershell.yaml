@@ -197,3 +197,125 @@ pipelines:
           onComplete:
             - write-output "mission complete"
             - bad stuff
+
+      - name: fail_onExecute_host
+        type: PowerShell
+        configuration:
+          runtime:
+            type: host
+          inputSteps:
+            - name: full_success
+          nodePool: win-static
+          environmentVariables:
+            foo: bar
+        execution:
+          onStart:
+            - write-output "starting"
+          onExecute:
+            - write-output "hello world. executing..."
+            - write-output "foo is $foo or is it $env:foo ?"
+            - bad stuff
+          onSuccess:
+            - write-output "we did it!"
+          onFailure:
+            - write-output "we've failed"
+          onComplete:
+            - write-output "mission complete"
+            
+      - name: fail_onStart_host
+        type: PowerShell
+        configuration:
+          runtime:
+            type: host
+          inputSteps:
+            - name: full_success
+          nodePool: win-static
+          environmentVariables:
+            foo: bar
+        execution:
+          onStart:
+            - write-output "starting"
+            - bad stuff
+          onExecute:
+            - write-output "hello world. executing..."
+            - write-output "foo is $foo or is it $env:foo ?"
+          onSuccess:
+            - write-output "we did it!"
+          onFailure:
+            - write-output "we've failed"
+          onComplete:
+            - write-output "mission complete"
+
+      - name: fail_onFailure_host
+        type: PowerShell
+        configuration:
+          runtime:
+            type: host
+          inputSteps:
+            - name: full_success
+          nodePool: win-static
+          environmentVariables:
+            foo: bar
+        execution:
+          onStart:
+            - write-output "starting"
+          onExecute:
+            - write-output "hello world. executing..."
+            - write-output "foo is $foo or is it $env:foo ?"
+            - bad stuff
+          onSuccess:
+            - write-output "we did it!"
+          onFailure:
+            - write-output "we've failed"
+            - bad stuff
+          onComplete:
+            - write-output "mission complete"
+
+      - name: fail_onSuccess_host
+        type: PowerShell
+        configuration:
+          runtime:
+            type: host
+          affinityGroup: winffinity
+          inputSteps:
+            - name: full_success
+          nodePool: win-static
+          environmentVariables:
+            foo: bar
+        execution:
+          onStart:
+            - write-output "starting"
+          onExecute:
+            - write-output "hello world. executing..."
+            - write-output "foo is $foo or is it $env:foo ?"
+          onSuccess:
+            - write-output "we did it!"
+            - bad stuff
+          onFailure:
+            - write-output "we've failed"
+          onComplete:
+            - write-output "mission complete"
+
+      - name: fail_onComplete_host
+        type: PowerShell
+        configuration:
+          runtime:
+            type: host
+          inputSteps:
+            - name: full_success
+          nodePool: win-static
+          environmentVariables:
+            foo: bar
+        execution:
+          onStart:
+            - write-output "starting"
+          onExecute:
+            - write-output "hello world. executing..."
+            - write-output "foo is $foo or is it $env:foo ?"
+          onSuccess:
+            - write-output "we did it!"
+          onFailure:
+            - write-output "we've failed"
+          onComplete:
+            - write-output "mission complete"
+            - bad stuff
