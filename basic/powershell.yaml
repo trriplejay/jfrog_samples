@@ -51,6 +51,7 @@ pipelines:
             - try { $pipeline_writeable_env = "haha i changed you" } catch {$_}            
             - try { $step_writeable_env = "haha i changed you" } catch {$_}            
             - get-variable
+            - get-variable | format-table -property name, value, options
             - try { $global:pipeline_writeable_env = "haha i changed you" } catch {$_}                        
             - write-output "$global:pipeline_writeable_env"
             - write-output "$pipeline_writeable_env"
