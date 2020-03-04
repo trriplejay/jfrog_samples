@@ -54,6 +54,8 @@ pipelines:
             - try { $global:pipeline_writeable_env = "haha i changed you" } catch {$_}                        
             - write-output "$global:pipeline_writeable_env"
             - write-output "$pipeline_writeable_env"
+            - write-output "$global:pipeline_readonly_env"
+            - write-output "$pipeline_readonly_env"
 
           onSuccess:
             - write-output "current section. is it $current_script_section or $global:current_script_section"
