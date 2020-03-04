@@ -46,11 +46,12 @@ pipelines:
           onExecute:
             - write-output "current section. is it $current_script_section or $global:current_script_section"
             - write-output "lets take a look at the whole ENV.. its faster..."
-            - get-variable
+            - get-variable res*
             - try { $pipeline_readonly_env = "haha i changed you" } catch {$_}
+            - try { $global:pipeline_readonly_env = "haha i changed you" } catch {$_}
             - try { $pipeline_writeable_env = "haha i changed you" } catch {$_}            
             - try { $step_writeable_env = "haha i changed you" } catch {$_}            
-            - get-variable
+            - get-variable res*
             - try { $global:pipeline_writeable_env = "haha i changed you" } catch {$_}                        
             - write-output "$global:pipeline_writeable_env"
             - write-output "$pipeline_writeable_env"
