@@ -326,3 +326,28 @@ pipelines:
           onComplete:
             - write-output "mission complete"
             - bad stuff
+  - name: test_header_funcs
+    steps:
+      - name: add_run_files
+        type: PowerShell
+        configuration:
+          inputResources:
+            - name: myRepo
+        execution:
+          onExecute:
+            - get-childitem $run_dir\workspace
+            - add_run_files $res_myRepo_resourcePath
+            - get-childitem $run_dir\workspace
+            
+      - name: restore_run_files
+        type: PowerShell
+        configuration:
+          inputResources:
+            - name: myRepo
+          inputSteps:
+            - name: add_run_files
+        execution:
+          onExecute:
+            - get-childitem $run_dir\workspace
+            - restore_run_files $res_myRepo_resourcePath
+            - get-childitem $run_dir\workspace
