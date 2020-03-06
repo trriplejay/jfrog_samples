@@ -63,7 +63,7 @@ pipelines:
             - get-variable -name pipeline_writeable_env
             - get-variable -name pipeline_writeable_env -scope global         
             - get-variable -name KUBECONFIG
-            - cat "$KUBECONFIG"
+            - get-content "$KUBECONFIG"
             - get-childitem "$step_workspace_dir/johns_kube"
             
 
