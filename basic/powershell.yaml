@@ -363,7 +363,7 @@ pipelines:
             - get-childitem $run_dir\workspace\myrun
             - get-childitem $step_tmp_dir
             - get-childitem $pipeline_workspace_dir
-            - remove-item -recursive -path $res_myRepo_resourcePath
+            - remove-item -recurse -path $res_myRepo_resourcePath
             - restore_pipeline_files -name mypipe -path $res_myRepo_resourcePath
             - get-childitem $pipeline_workspace_dir\mypipe
             - get-childitem $res_myRepo_resourcePath
