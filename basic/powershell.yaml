@@ -39,6 +39,7 @@ pipelines:
           integrations:
             - name: johns_generic_envs
             - name: johns_art
+            - name: johns_kube
         execution:
           onStart:
             - write-output "image resource path is $res_myImage_resourcePath"
@@ -60,7 +61,11 @@ pipelines:
             - get-variable -name pipeline_readonly_env
             - get-variable -name pipeline_readonly_env -scope global
             - get-variable -name pipeline_writeable_env
-            - get-variable -name pipeline_writeable_env -scope global            
+            - get-variable -name pipeline_writeable_env -scope global         
+            - get-variable -name KUBECONFIG
+            - cat "$KUBECONFIG"
+            - get-childitem "$step_workspace_dir/johns_kube"
+            
 
           onSuccess:
             - write-output "current section. is it $current_script_section or $global:current_script_section"
