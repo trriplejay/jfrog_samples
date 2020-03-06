@@ -335,6 +335,10 @@ pipelines:
             - name: myRepo
         execution:
           onExecute:
+            - try { add_run_files } catch {$_} # no arguments
+            - try { add_run_files "blah" } catch {$_} # one argument
+            - try { add_run_files -sources a,b,c } catch {$_} # missing name
+            - try { add_run_files -sources "test" -name "hello world"} catch {$_} #space not allowed
             - get-childitem $run_dir\workspace
             - get-childitem $res_myRepo_resourcePath
             - add_run_files -sources $res_myRepo_resourcePath -name myrun
