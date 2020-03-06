@@ -345,6 +345,7 @@ pipelines:
             - add_run_files -sources $res_myRepo_resourcePath\file* myfiles
             - get-childitem $run_dir\workspace
             - get-childitem $run_dir\workspace\myrun
+            - get-childitem $run_dir\workspace\myfiles            
             - get-childitem $pipeline_workspace_dir
             - add_pipeline_files -sources $res_myRepo_resourcePath -name mypipe
             - add_pipeline_files -sources $res_myRepo_resourcePath\file* myfiles            
@@ -364,6 +365,7 @@ pipelines:
             - get-childitem $pipeline_workspace_dir
             - restore_run_files -name myrun -path $step_tmp_dir
             - get-childitem $run_dir\workspace\myrun
+            - get-childitem $run_dir\workspace\myfiles            
             - get-childitem $step_tmp_dir
             - get-childitem $pipeline_workspace_dir
             - remove-item -recurse -path $step_tmp_dir\*
