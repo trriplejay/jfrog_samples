@@ -361,6 +361,7 @@ pipelines:
         execution:
           onExecute:
             - get-childitem $run_dir\workspace
+            - get-childitem $pipeline_workspace_dir
             - restore_run_files -name myrun -path $step_tmp_dir
             - get-childitem $run_dir\workspace\myrun
             - get-childitem $step_tmp_dir
@@ -368,9 +369,10 @@ pipelines:
             - remove-item -recurse -path $step_tmp_dir\*
             - restore_pipeline_files -name mypipe -path $step_tmp_dir
             - get-childitem $pipeline_workspace_dir\mypipe
-            - get-childitem $res_myRepo_resourcePath
-            - restore_run_files -name myfiles -path .
-            - get-childitem .
+            - get-childitem $step_tmp_dir
+            - remove-item -recurse -path $step_tmp_dir\*            
+            - restore_run_files -name myfiles -path $step_tmp_dir
+            - get-childitem $step_tmp_dir
             - remove-item -recurse -path $step_tmp_dir\*
             - restore_pipeline_files -name myfiles -path $step_tmp_dir
             - get-childitem $step_tmp_dir
