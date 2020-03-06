@@ -342,10 +342,12 @@ pipelines:
             - get-childitem $run_dir\workspace
             - get-childitem $res_myRepo_resourcePath
             - add_run_files -sources $res_myRepo_resourcePath -name myrun
+            - add_run_files -sources $res_myRepo_resourcePath\file* myfiles
             - get-childitem $run_dir\workspace
             - get-childitem $run_dir\workspace\myrun
             - get-childitem $pipeline_workspace_dir
             - add_pipeline_files -sources $res_myRepo_resourcePath -name mypipe
+            - add_pipeline_files -sources $res_myRepo_resourcePath\file* myfiles            
             - get-childitem $pipeline_workspace_dir
             - get-childitem $pipeline_workspace_dir\mypipe            
             
@@ -367,3 +369,7 @@ pipelines:
             - restore_pipeline_files -name mypipe -path $res_myRepo_resourcePath
             - get-childitem $pipeline_workspace_dir\mypipe
             - get-childitem $res_myRepo_resourcePath
+            - restore_run_files -name myfiles -path .
+            - get-childitem .
+            - restore_pipeline_files -name myfiles -path $step_tmp_dir
+            - get-childitem $step_tmp_dir
