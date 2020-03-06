@@ -338,9 +338,11 @@ pipelines:
             - get-childitem $run_dir\workspace
             - add_run_files $res_myRepo_resourcePath myrun
             - get-childitem $run_dir\workspace
+            - get-childitem $run_dir\workspace\myrun
             - get-childitem $pipeline_workspace_dir
             - add_pipeline_files $res_myRepo_resourcePath mypipe
             - get-childitem $pipeline_workspace_dir
+            - get-childitem $pipeline_workspace_dir\mypipe            
             
       - name: restore_run_files
         type: PowerShell
@@ -353,8 +355,8 @@ pipelines:
           onExecute:
             - get-childitem $run_dir\workspace
             - restore_run_files $step_tmp_dir myrun
-            - get-childitem $run_dir\workspace
+            - get-childitem $run_dir\workspace\myrun
             - get-childitem $step_tmp_dir
             - get-childitem $pipeline_workspace_dir
             - restore_pipeline_files $res_myRepo_resourcePath mypipe
-            - get-childitem $pipeline_workspace_dir
+            - get-childitem $pipeline_workspace_dir\mypipe
