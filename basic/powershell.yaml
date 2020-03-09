@@ -30,7 +30,6 @@ resources:
       recursive: true
       flat: false
       excludePatterns: "negatory*"
-      includePatterns: "positron*"
       limit: 5
       offset: 2
       
