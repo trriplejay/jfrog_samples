@@ -19,6 +19,22 @@ resources:
       buildName: test
       buildNumber: 0
       
+  - name: myFileSpec
+    type: FileSpec
+    configuration:
+      sourceArtifactory: johns_art
+      target: pipelines_1578094170
+      sortOrder: asc
+      pattern: "projects/*"
+      props: "hmmm?"
+      recursive: true
+      flat: false
+      excludePatterns: "negatory*"
+      includePatterns: "positron*"
+      limit: 5
+      offset: 2
+      
+      
 pipelines:
   - name: win_one_little_step
     configuration:
@@ -36,6 +52,7 @@ pipelines:
             - name: myImage
             - name: myRepo
             - name: myBuildInfo
+            - name: myFileSpec
           integrations:
             - name: johns_generic_envs
             - name: johns_art
