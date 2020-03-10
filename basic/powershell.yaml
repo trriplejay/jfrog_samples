@@ -24,16 +24,12 @@ resources:
     configuration:
       sourceArtifactory: johns_art
       target: pipelines_1578094170
-      sortOrder: asc
-      sortBy: "a"
       pattern: "projects/*"
       props: "hmmm?"
       recursive: true
       flat: false
-      excludePatterns: "negatory*"
       limit: 5
       offset: 2
-      
       
 pipelines:
   - name: win_one_little_step
