@@ -29,10 +29,7 @@ resources:
       props: "hmmm?"
       recursive: true
       flat: false
-      excludePatterns:
-        - "negatron*"
-        - "negatory*"
-        - "non*"
+      excludePatterns: "negatory*"
       limit: 5
       offset: 2
       
