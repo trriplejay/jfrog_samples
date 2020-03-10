@@ -29,8 +29,50 @@ resources:
       flat: false
       limit: 5
       offset: 2
+  - name: myIncomingHook
+    type: IncomingWebhook
+    configuration:
+      webhookName: johns_wh_internal
+      
+  - name: myOutgoingHook
+    type: OutgoingWebhook
+    configuration:
+      webhookName: johns_wh_external
+      headers:
+        Content-Type: "application/json"
+        MySpecialHeader: "foobar"
+        Pipeline-Name: "$pipeline_name"
+      path: "/pipelines/api/v1/projectIntegrations/20/hook
+      query: "hello=world"
       
 pipelines:
+############ HOOKS
+  - name: outgoing_hook
+    steps:
+      - name: send_it
+        type: PowerShell
+        configuration:
+          outputResources:
+            - name: myOutgoingHook
+        execution:
+          onExecute:
+            - Write-Output "hello"
+            - Get-Variable | format-table
+  - name: incoming_hook
+    steps:
+      - name: get_it
+        type: PowerShell
+        configuration:
+          inputResources:
+            - name: myIncomingHook
+        execution:
+          onExecute:
+            - Write-Output "hello"
+            - Get-Variable | format-table
+########### END HOOKS
+
+
+############ resources/integrations
   - name: win_one_little_step
     configuration:
       environmentVariables:
@@ -88,7 +130,11 @@ pipelines:
             - write-output "current section. is it $current_script_section or $global:current_script_section"
           onComplete:
             - write-output "current section. is it $current_script_section or $global:current_script_section"
-            
+############ END resources/integrations
+
+
+
+############ flow control
   - name: windows_basic_pipe
     steps:
       - name: full_success
@@ -344,6 +390,12 @@ pipelines:
           onComplete:
             - write-output "mission complete"
             - bad stuff
+            
+########### END flow control
+
+
+
+########### header util testing
   - name: test_header_funcs
     steps:
       - name: add_run_files
@@ -396,3 +448,4 @@ pipelines:
             - remove-item -recurse -path $step_tmp_dir\*
             - restore_pipeline_files -name myfiles -path $step_tmp_dir
             - get-childitem $step_tmp_dir
+########### END header util testing
