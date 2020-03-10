@@ -29,6 +29,7 @@ resources:
       flat: false
       limit: 5
       offset: 2
+      
   - name: myIncomingHook
     type: IncomingWebhook
     configuration:
@@ -43,7 +44,7 @@ resources:
         MySpecialHeader: "foobar"
         Pipeline-Name: "$pipeline_name"
       path: "/pipelines/api/v1/projectIntegrations/20/hook"
-      query: "hello=world"
+      parameters: "hello=world"
       
 pipelines:
 ############ HOOKS
