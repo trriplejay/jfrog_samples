@@ -42,7 +42,7 @@ resources:
         Content-Type: "application/json"
         MySpecialHeader: "foobar"
         Pipeline-Name: "$pipeline_name"
-      path: "/pipelines/api/v1/projectIntegrations/20/hook
+      path: "/pipelines/api/v1/projectIntegrations/20/hook"
       query: "hello=world"
       
 pipelines:
