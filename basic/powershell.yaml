@@ -25,6 +25,9 @@ resources:
       sourceArtifactory: johns_art
       target: pipelines_1578094170
       sortOrder: asc
+      sortBy:
+        - "a"
+        - "b"
       pattern: "projects/*"
       props: "hmmm?"
       recursive: true
