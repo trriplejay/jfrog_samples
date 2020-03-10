@@ -90,6 +90,7 @@ pipelines:
           inputResources:
             - name: myImage
             - name: myRepo
+              trigger: false
             - name: myBuildInfo
             - name: myFileSpec
           integrations:
@@ -405,6 +406,7 @@ pipelines:
         configuration:
           inputResources:
             - name: myRepo
+              trigger: false
         execution:
           onExecute:
             - try { add_run_files } catch {$_} # no arguments
@@ -429,6 +431,7 @@ pipelines:
         configuration:
           inputResources:
             - name: myRepo
+              trigger: false
           inputSteps:
             - name: add_run_files
         execution:
