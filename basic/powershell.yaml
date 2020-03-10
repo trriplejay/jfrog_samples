@@ -25,7 +25,6 @@ resources:
       sourceArtifactory: johns_art
       target: pipelines_1578094170
       pattern: "projects/*"
-      props: "hmmm?"
       recursive: true
       flat: false
       limit: 5
