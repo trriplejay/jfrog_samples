@@ -59,7 +59,7 @@ pipelines:
           onExecute:
             - Write-Output "hello"
             - Get-Variable | format-table
-            - set_payload -name myOutgoingWebhook -payload "{`"hello`":`"World`"}"
+            - set_payload -name myOutgoingHook -payload "{`"hello`":`"World`"}"
   - name: incoming_hook
     steps:
       - name: get_it
