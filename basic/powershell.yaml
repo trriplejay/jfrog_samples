@@ -29,7 +29,7 @@ resources:
       flat: false
       limit: 5
       offset: 2
-      
+########## HOOKS basic auth
   - name: myIncomingHook
     type: IncomingWebhook
     configuration:
@@ -45,7 +45,48 @@ resources:
         Pipeline-Name: "$pipeline_name"
       path: "/pipelines/api/v1/projectIntegrations/20/hook"
       parameters: "hello=world"
+########### END HOOKS basic auth
+
+############ HOOKS hmac
+  - name: myIncomingHook_hmac
+    type: IncomingWebhook
+    configuration:
+      webhookName: johns_wh_internal_hmac
       
+  - name: myOutgoingHook_hmac
+    type: OutgoingWebhook
+    configuration:
+      webhookName: johns_wh_external_hmac
+      headers:
+        Content-Type: "application/json"
+        MySpecialHeader: "foobar"
+        Pipeline-Name: "$pipeline_name"
+      path: "/pipelines/api/v1/projectIntegrations/22/hook"
+      parameters: "hello=world"
+############ END HOOKS hmac
+
+############ HOOKS auth
+  - name: myIncomingHook_auth
+    type: IncomingWebhook
+    configuration:
+      webhookName: johns_wh_internal_auth
+      
+  - name: myOutgoingHook_auth
+    type: OutgoingWebhook
+    configuration:
+      webhookName: johns_wh_external_auth
+      headers:
+        Content-Type: "application/json"
+        MySpecialHeader: "foobar"
+        Pipeline-Name: "$pipeline_name"
+      path: "/pipelines/api/v1/projectIntegrations/24/hook"
+      parameters: "hello=world"
+############ END HOOKS hmac
+
+
+
+
+
 pipelines:
 ############ HOOKS
   - name: outgoing_hook
@@ -53,6 +94,8 @@ pipelines:
       - name: send_it
         type: PowerShell
         configuration:
+          inputResources:
+            - name: MyBuildInfo
           outputResources:
             - name: myOutgoingHook
         execution:
@@ -60,17 +103,69 @@ pipelines:
             - Write-Output "hello"
             - Get-Variable | format-table
             - set_payload -name myOutgoingHook -payload "{`"hello`":`"World`"}"
+            
+      - name: send_it_hmac
+        type: PowerShell
+        configuration:
+          inputResources:
+            - name: MyBuildInfo
+          outputResources:
+            - name: myOutgoingHook_hmac
+        execution:
+          onExecute:
+            - Write-Output "hello"
+            - Get-Variable | format-table
+            - set_payload -name myOutgoingHook_hmac -payload "{`"hello`":`"World`"}"
+            
+      - name: send_it_auth
+        type: PowerShell
+        configuration:
+          inputResources:
+            - name: MyBuildInfo
+          outputResources:
+            - name: myOutgoingHook_auth
+        execution:
+          onExecute:
+            - Write-Output "hello"
+            - Get-Variable | format-table
+            - set_payload -name myOutgoingHook_auth -payload "{`"hello`":`"World`"}"
+
   - name: incoming_hook
     steps:
       - name: get_it
         type: PowerShell
         configuration:
           inputResources:
+            - name: MyBuildInfo
             - name: myIncomingHook
         execution:
           onExecute:
             - Write-Output "hello"
             - Get-Variable | format-table
+            
+      - name: get_it_hmac
+        type: PowerShell
+        configuration:
+          inputResources:
+            - name: MyBuildInfo
+            - name: myIncomingHook_hmac
+        execution:
+          onExecute:
+            - Write-Output "hello"
+            - Get-Variable | format-table
+            
+      - name: get_it_auth
+        type: PowerShell
+        configuration:
+          inputResources:
+            - name: MyBuildInfo
+            - name: myIncomingHook_auth
+        execution:
+          onExecute:
+            - Write-Output "hello"
+            - Get-Variable | format-table
+
+
 ########### END HOOKS
 
 
