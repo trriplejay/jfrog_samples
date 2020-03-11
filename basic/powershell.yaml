@@ -103,7 +103,7 @@ pipelines:
             - Write-Output "hello"
             - Get-Variable | format-table
 #             - set_payload -name myOutgoingHook -payload "{`"hello`":`"World`"}"
-            - $payloadFile = test.json
+            - $payloadFile = "test.json"
             - New-Item -Path "test.json"  -Force -ItemType File
             - '[IO.File]::WriteAllLines(("test.json" | Resolve-Path), "{`"hello`":`"World`"}")'
             - set_payload -name myOutgoingHook -payload test.json -file
