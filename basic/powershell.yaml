@@ -136,7 +136,7 @@ pipelines:
         type: PowerShell
         configuration:
           inputResources:
-            - name: MyBuildInfo
+            - name: myBuildInfo
             - name: myIncomingHook
         execution:
           onExecute:
@@ -147,7 +147,7 @@ pipelines:
         type: PowerShell
         configuration:
           inputResources:
-            - name: MyBuildInfo
+            - name: myBuildInfo
             - name: myIncomingHook_hmac
         execution:
           onExecute:
@@ -158,7 +158,7 @@ pipelines:
         type: PowerShell
         configuration:
           inputResources:
-            - name: MyBuildInfo
+            - name: myBuildInfo
             - name: myIncomingHook_auth
         execution:
           onExecute:
