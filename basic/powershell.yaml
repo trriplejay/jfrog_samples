@@ -95,7 +95,7 @@ pipelines:
         type: PowerShell
         configuration:
           inputResources:
-            - name: MyBuildInfo
+            - name: myBuildInfo
           outputResources:
             - name: myOutgoingHook
         execution:
@@ -108,7 +108,7 @@ pipelines:
         type: PowerShell
         configuration:
           inputResources:
-            - name: MyBuildInfo
+            - name: myBuildInfo
           outputResources:
             - name: myOutgoingHook_hmac
         execution:
@@ -121,7 +121,7 @@ pipelines:
         type: PowerShell
         configuration:
           inputResources:
-            - name: MyBuildInfo
+            - name: myBuildInfo
           outputResources:
             - name: myOutgoingHook_auth
         execution:
