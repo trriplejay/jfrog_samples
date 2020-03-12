@@ -569,5 +569,6 @@ pipelines:
             - docker images
             - docker version
             - choco install -y which
-            - docker ps -a
             - write-output "path is $env:Path"
+            - docker ps -a
+
