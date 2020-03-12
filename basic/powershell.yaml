@@ -560,6 +560,8 @@ pipelines:
         type: PowerShell
         execution:
           onExecute:
+            - get-childitem env:
+            - get-variable | format-table
             - docker ps -a
             - docker images
             - docker version
