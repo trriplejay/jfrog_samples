@@ -568,4 +568,6 @@ pipelines:
             - docker ps -a
             - docker images
             - docker version
-
+            - choco install -y which
+            - docker ps -a
+            - 'get-childitem env:'
