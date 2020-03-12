@@ -570,4 +570,4 @@ pipelines:
             - docker version
             - choco install -y which
             - docker ps -a
-            - 'get-childitem env:'
+            - write-output "path is $env:Path"
