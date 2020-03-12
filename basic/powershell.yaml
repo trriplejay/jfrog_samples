@@ -571,4 +571,7 @@ pipelines:
             - choco install -y which
             - write-output "path is $env:Path"
             - docker ps -a
+            - refreshenv
+            - write-output "path is $env:Path"
+            - docker ps -a
 
