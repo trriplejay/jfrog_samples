@@ -553,3 +553,14 @@ pipelines:
             - restore_pipeline_files -name myfiles -path $step_tmp_dir
             - get-childitem $step_tmp_dir
 ########### END header util testing
+
+  - name: win_scratch
+    steps:
+      - name: win_scratch_step
+        type: PowerShell
+        execution:
+          onExecute:
+            - docker ps -a
+            - docker images
+            - docker version
+
