@@ -11,7 +11,14 @@ resources:
     configuration:
       path: trriplejay/jfrog_samples
       gitProvider: tr_github
-    
+
+  - name: imageRepo
+    type: GitRepo
+    configuration:
+      path: PIP/imagebuilds
+      gitProvider: johns_bbs
+
+
   - name: myBuildInfo
     type: BuildInfo
     configuration:
@@ -575,3 +582,21 @@ pipelines:
             - write-output "path is $env:Path"
             - docker ps -a
 
+############### native steps  #####################
+
+#--------- docker build
+pipelines:
+  - name: docker_native
+    steps:
+      - name: build
+        type: DockerBuild
+        configuration:
+          affinityGroup: buildAndPush
+          integrations:
+            - name: johns_art
+          inputResources:
+            - name: imageRepo
+          dockerFileLocation: ./w19/base
+          dockerFileName: Dockerfile
+          dockerImageName: 35.238.69.200:8082/buildimages/w19base
+          dockerImageTag: ${run_number}
