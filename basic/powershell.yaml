@@ -593,3 +593,8 @@ pipelines:
           dockerFileName: Dockerfile
           dockerImageName: 35.238.69.200:8082/buildimages/w19base
           dockerImageTag: ${run_number}
+        execution:
+          onStart:
+            - ls $env:TEMP
+            - bad command
+
