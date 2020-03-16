@@ -613,9 +613,6 @@ pipelines:
           targetRepository: buildimages
           autoPublishBuildInfo: true
         execution:
-          onStart:
-            - ls "$env:TEMP"
-            - ls "$env:TEMP\jfrog"
           onComplete:
             - ls "$env:TEMP"
             - ls "$env:TEMP\jfrog"
