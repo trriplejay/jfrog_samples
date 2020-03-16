@@ -595,8 +595,27 @@ pipelines:
           dockerImageTag: ${run_number}
         execution:
           onStart:
-            - ls $env:TEMP
+            - ls "$env:TEMP"
           onComplete:
             - ls "$env:TEMP"
             - ls "$env:TEMP\jfrog"
 
+      - name: push
+        type: DockerPush
+        configuration:
+          affinityGroup: buildAndPush
+          inputSteps:
+            - name: build
+          integrations:
+            - name: johns_art
+          outputResources:
+            - name: myBuildInfo
+          targetRepository: buildimages
+          autoPublishBuildInfo: true
+        execution:
+          onStart:
+            - ls "$env:TEMP"
+            - ls "$env:TEMP\jfrog"
+          onComplete:
+            - ls "$env:TEMP"
+            - ls "$env:TEMP\jfrog"
