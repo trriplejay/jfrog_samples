@@ -613,6 +613,11 @@ pipelines:
           targetRepository: buildimages
           autoPublishBuildInfo: true
         execution:
+          onStart:
+            - Install-ChocoPackage  -package jfrog-cli -options --version=1.34.0
           onComplete:
+            # - write-output "try the push manually using just "try the push manually using just docker"
+            # - docker login 35.238.69.200:8082 -u ${int_johns_art_user} -p ${int_johns_art_apikey}
+            # - docker push "${build_dockerImageName}:${build_dockerImageTag}"
             - ls "$env:TEMP"
             - ls "$env:TEMP\jfrog"
