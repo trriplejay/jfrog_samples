@@ -614,7 +614,7 @@ pipelines:
           autoPublishBuildInfo: true
         execution:
           onStart:
-            - Install-ChocoPackage  -package jfrog-cli -options --version=1.34.0
+            - choco install -y jfrog-cli --version=1.34.0
           onComplete:
             # - write-output "try the push manually using just "try the push manually using just docker"
             # - docker login 35.238.69.200:8082 -u ${int_johns_art_user} -p ${int_johns_art_apikey}
