@@ -596,5 +596,7 @@ pipelines:
         execution:
           onStart:
             - ls $env:TEMP
-            - bad command
+          onComplete:
+            - ls "$env:TEMP"
+            - ls "$env:TEMP\jfrog"
 
