@@ -604,7 +604,7 @@ pipelines:
             - name: myRepo
               trigger: false
           inputSteps:
-            - name: add_run_files
+            - name: add_files
         execution:
           onExecute:
             - get-childitem $run_dir\workspace
