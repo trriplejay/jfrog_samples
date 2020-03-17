@@ -32,12 +32,13 @@ resources:
     type: FileSpec
     configuration:
       sourceArtifactory: johns_art
-      target: pipelines_1578094170
-      pattern: "projects/*"
+      target: state_data
+      pattern: "pipelines_1582673347/projects/*"
       recursive: true
       flat: false
       limit: 5
       offset: 2
+
   - name: myVmCluster
     type: VmCluster
     configuration:
