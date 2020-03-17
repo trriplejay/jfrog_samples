@@ -38,6 +38,12 @@ resources:
       flat: false
       limit: 5
       offset: 2
+  - name: myVmCluster
+    type: VmCluster
+    configuration:
+      sshKey: johns_ssh
+      targets:
+        - 35.238.69.200
 ########## HOOKS basic auth
   - name: myIncomingHook
     type: IncomingWebhook
@@ -97,6 +103,52 @@ resources:
 
 
 pipelines:
+############ baseline demo
+  - name: baseline
+    steps:
+      - name: story_1_to_6
+        type: PowerShell
+        configuration:
+          runtime:
+            type: image
+            image:
+              auto:
+                language: dotnetcore
+                versions:
+                  - 3.1
+          environmentVariables:
+            foo: bar
+            readOnly:
+              hello: world
+          integrations:
+            - name: johns_ssh
+            - name: johns_art
+            - name: johns_gcloud
+            - name: johns_kube
+            - name: johns_amazon
+            - name: johns_docker
+            - name: aidan_slack
+            - name: aidan_email
+            - name: aidan_jira
+          inputResources:
+            - name: myRepo
+              trigger: false
+            - name: myFileSpec
+            - name: myBaseImage
+              autoPull: true
+            - name: myVmCluster
+        execution:
+          onExecute:
+            - write-output "foo is $foo"
+            - write-output "hello is $hello"
+            - try { $foo = "asdf"} catch {$_} finally {write-output "foo is $foo"}
+            - try { $hello = "asdf"} catch {$_} finally {write-output "hello is $hello"}
+            - try { send_notification aidan_slack } catch {$_}
+            - try { send_notifciation aidan_jira } catch {$_}
+            - Get-Variable | format-table
+          onComplete:
+            - try { send_notification aidan_email -recipient "john@shippable.com"}
+
 ############ HOOKS
   - name: outgoing_hook
     steps:
@@ -597,6 +649,7 @@ pipelines:
             - name: johns_art
           inputResources:
             - name: myRepo
+              trigger: false
           dockerFileLocation: ./base
           dockerFileName: Dockerfile
           dockerImageName: 35.238.69.200:8082/buildimages/w19base
