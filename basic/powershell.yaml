@@ -117,9 +117,9 @@ pipelines:
                 versions:
                   - 3.1
           environmentVariables:
-            foo: bar
             readOnly:
-              hello: world
+              hello: "world"
+            foo: "bar"
           integrations:
             - name: johns_ssh
             - name: johns_art
@@ -135,7 +135,6 @@ pipelines:
               trigger: false
             - name: myFileSpec
             - name: myBaseImage
-              autoPull: true
             - name: myVmCluster
         execution:
           onExecute:
