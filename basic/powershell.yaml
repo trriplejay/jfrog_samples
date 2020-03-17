@@ -127,7 +127,7 @@ pipelines:
             - name: johns_art
             - name: johns_gcloud
             - name: johns_kube
-            - name: johns_amazon
+            - name: aidan_aws
             - name: johns_docker
             - name: aidan_slack
             - name: aidan_email
