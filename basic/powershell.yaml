@@ -105,6 +105,9 @@ resources:
 pipelines:
 ############ baseline demo
   - name: baseline
+    configuration:
+      environmentVariables:
+        hello: "world"
     steps:
       - name: story_1_to_6
         type: PowerShell
@@ -117,8 +120,6 @@ pipelines:
                 versions:
                   - 3.1
           environmentVariables:
-            readOnly:
-              hello: "world"
             foo: "bar"
           integrations:
             - name: johns_ssh
