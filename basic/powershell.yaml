@@ -6,6 +6,14 @@ resources:
       imageName: trriplejay/simpleserver
       imageTag: latest
 
+  - name: myBaseImage
+    type: Image
+    configuration:
+      registry: johns_art
+      sourceRepository: buildimages
+      imageName: 35.238.69.200:8082/buildimages/w19base
+      imageTag: latest
+
   - name: myRepo
     type: GitRepo
     configuration:
@@ -610,6 +618,7 @@ pipelines:
             - name: johns_art
           outputResources:
             - name: myBuildInfo
+            - name: myBaseImage
           targetRepository: buildimages
           autoPublishBuildInfo: true
           forceXrayScan: true
