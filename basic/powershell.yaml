@@ -621,8 +621,8 @@ pipelines:
             - name: myBaseImage
           targetRepository: buildimages
           autoPublishBuildInfo: true
-          forceXrayScan: true
-          failOnScan: true
+          # forceXrayScan: true
+          # failOnScan: true
         execution:
           onStart:
             - choco install -y jfrog-cli --version=1.34.0
