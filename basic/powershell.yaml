@@ -143,10 +143,11 @@ pipelines:
           onStart:
             - try { send_notification aidan_slack } catch {$_}
           onExecute:
+            - dotnet --version
             - write-output "foo is $foo"
             - write-output "hello is $hello"
-            - try { $foo = "asdf"} catch {$_} finally {write-output "foo is $foo"}
-            - try { $hello = "asdf"} catch {$_} finally {write-output "hello is $hello"}
+            - try { write-output "foo is $foo"; $foo = "asdf"} catch {$_} finally {write-output "foo is $foo"}
+            - try { write-output "hello is $hello"; $hello = "asdf"} catch {$_} finally {write-output "hello is $hello"}
             - try { send_notifciation aidan_jira } catch {$_}
             - Get-Variable | format-table
           onComplete:
