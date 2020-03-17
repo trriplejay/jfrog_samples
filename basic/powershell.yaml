@@ -141,17 +141,17 @@ pipelines:
             - name: myVmCluster
         execution:
           onStart:
-            - choco install -y jfrog-cli --version=1.34.0
+            - try { send_notification aidan_slack } catch {$_}
           onExecute:
             - write-output "foo is $foo"
             - write-output "hello is $hello"
             - try { $foo = "asdf"} catch {$_} finally {write-output "foo is $foo"}
             - try { $hello = "asdf"} catch {$_} finally {write-output "hello is $hello"}
-            - try { send_notification aidan_slack } catch {$_}
             - try { send_notifciation aidan_jira } catch {$_}
             - Get-Variable | format-table
           onComplete:
             - try { send_notification aidan_email -recipient "john@shippable.com"} catch {$_}
+            - try { send_notification aidan_slack } catch {$_}
 
 ############ HOOKS
   - name: outgoing_hook
