@@ -587,7 +587,7 @@ pipelines:
             - add_run_files -sources $res_myRepo_resourcePath\file* myfiles
             - if (!(test-path sum.txt)) {New-Item sum.txt; add-content -Path "sum.txt" -Value "{`"count`":1}"}
             - if (test-path sum.txt) {$contents = get-content sum.txt | ConvertFrom-Json ; $contents.count +=1; $contents | convertTo-Json | add-content -Path "sum.txt" }
-            - save_cache sum.txt myCache
+            - try {add_cache_files sum.txt myCache} catch {$_}
             - get-childitem $run_dir\workspace
             - get-childitem $run_dir\workspace\myrun
             - get-childitem $run_dir\workspace\myfiles
