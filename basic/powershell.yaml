@@ -286,8 +286,6 @@ pipelines:
             - get-variable -name KUBECONFIG
             - get-content "$KUBECONFIG"
             - get-childitem "$step_workspace_dir/johns_kube"
-
-
           onSuccess:
             - write-output "current section. is it $current_script_section or $global:current_script_section"
             - write-output "try to change a readonly variable"
@@ -560,7 +558,6 @@ pipelines:
 ########### END flow control
 
 
-
 ########### header util testing
   - name: test_header_funcs
     steps:
@@ -580,14 +577,14 @@ pipelines:
             - try { add_pipeline_files "blah" } catch {$_} # one argument
             - try { add_pipeline_files -sources a,b,c } catch {$_} # missing name
             - try { add_pipeline_files -sources "test" -name "hello world"} catch {$_} #space not allowed
-            - try {restore_cache_files myCache} catch {$_}
+            - try {restore_cache_files -name myCache} catch {$_}
             - get-childitem $run_dir\workspace
             - get-childitem $res_myRepo_resourcePath
             - add_run_files -sources $res_myRepo_resourcePath -name myrun
-            - add_run_files -sources $res_myRepo_resourcePath\file* myfiles
+            - add_run_files -sources $res_myRepo_resourcePath\file* -name myfiles
             - if (!(test-path "sum.txt")) {New-Item "sum.txt"; set-content -Path "sum.txt" -Value "{`"count`":1}"}
             - if (test-path "sum.txt") {$contents = get-content sum.txt | ConvertFrom-Json ; $contents.count +=1; $contents | convertTo-Json | set-content -Path "sum.txt" }
-            - try {add_cache_files sum.txt myCache} catch {$_}
+            - try {add_cache_files -sources sum.txt -name myCache} catch {$_}
             - get-childitem $run_dir\workspace
             - get-childitem $run_dir\workspace\myrun
             - get-childitem $run_dir\workspace\myfiles
