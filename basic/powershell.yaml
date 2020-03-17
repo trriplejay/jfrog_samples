@@ -151,7 +151,7 @@ pipelines:
             - try { send_notifciation aidan_jira } catch {$_}
             - Get-Variable | format-table
           onComplete:
-            - try { send_notification aidan_email -recipient "john@shippable.com"}
+            - try { send_notification aidan_email -recipient "john@shippable.com"} catch {$_}
 
 ############ HOOKS
   - name: outgoing_hook
