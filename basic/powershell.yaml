@@ -107,7 +107,8 @@ pipelines:
   - name: baseline
     configuration:
       environmentVariables:
-        hello: "world"
+        readOnly:
+          hello: "world"
     steps:
       - name: story_1_to_6
         type: PowerShell
