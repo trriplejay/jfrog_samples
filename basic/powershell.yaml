@@ -589,7 +589,7 @@ pipelines:
             - add_run_files -sources "$res_myRepo_resourcePath\file*" -name myFiles
             - add_run_files -sources "$res_myRepo_resourcePath\file1.txt", "$res_myRepo_resourcePath\base" -name myMixed
             - get-childitem $run_dir\workspace
-            - get-childitem $run_dir\workspace\myRun
+            - get-childitem $run_dir\workspace\myRepo
             - get-childitem $run_dir\workspace\myDirs
             - get-childitem $run_dir\workspace\myFiles
             - get-childitem $run_dir\workspace\myMixed
