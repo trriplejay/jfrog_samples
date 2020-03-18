@@ -637,6 +637,8 @@ pipelines:
             - try { get-childitem $step_workspace_dir\download\cache\myMixed } catch {$_}
             - add_run_variables "testvariable=asdffdjksfjk"
             - try {save_tests -sources "$res_myRepo_resourcePath\tests\sampleoutput.xml"} catch {$_}
+            - New-Item -Path ".\faketests" -ItemType Directory
+            - try {save_tests -sources faketests} catch {$_}
 
 
 
