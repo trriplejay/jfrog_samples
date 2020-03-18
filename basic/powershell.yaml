@@ -582,6 +582,7 @@ pipelines:
             - get-childitem $res_myRepo_resourcePath
             - add_run_files -sources "$res_myRepo_resourcePath" -name myrun
             - add_run_files -sources "$res_myRepo_resourcePath\file*" -name myfiles
+            - try {restore_cache_files myCache .} catch {$_}
             - if (!(test-path "sum.txt")) {New-Item "sum.txt"; set-content -Path "sum.txt" -Value "{`"count`":1}"}
             - if (test-path "sum.txt") {$contents = get-content sum.txt | ConvertFrom-Json ; $contents.count +=1; $contents | convertTo-Json | set-content -Path "sum.txt" }
             - try {$count = (Get-Content sum.txt | ConvertFrom-Json).count ; write-output "count is -- $count"}
