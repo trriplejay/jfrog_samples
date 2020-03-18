@@ -635,6 +635,7 @@ pipelines:
             - try { get-childitem $step_workspace_dir\download\cache\myFiles } catch {$_}
             - try { get-childitem $step_workspace_dir\download\cache\myMixed } catch {$_}
             - add_run_variables "testvariable=asdffdjksfjk"
+            - try {save_tests -sources "$res_myRepo_resourcePath\tests"} catch {$_}
 
 
 
