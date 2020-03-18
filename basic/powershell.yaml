@@ -606,7 +606,7 @@ pipelines:
             - get-childitem $pipeline_workspace_dir\myMixed
             #cache
             - try { get-childitem $step_workspace_dir\download\cache } catch {$_}
-            - try {restore_cache_files myCount .} catch {$_}
+            - try {restore_cache_files -name myCount -path "."} catch {$_}
             - ls
             - try {ls myCount} catch {$_}
             - try {cat myCount} catch {$_}
