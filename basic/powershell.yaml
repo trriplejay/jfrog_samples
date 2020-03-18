@@ -621,6 +621,7 @@ pipelines:
             - try { get-childitem $step_workspace_dir\download\cache\myDirs } catch {$_}
             - try { get-childitem $step_workspace_dir\download\cache\myFiles } catch {$_}
             - try { get-childitem $step_workspace_dir\download\cache\myMixed } catch {$_}
+            - add_run_variable "testvariable=asdffdjksfjk"
 
 
 
@@ -634,6 +635,7 @@ pipelines:
             - name: add_files
         execution:
           onExecute:
+            - $testvariable
             - get-childitem $run_dir\workspace
             #runs
             - restore_run_files -name myRepo -path $step_tmp_dir
