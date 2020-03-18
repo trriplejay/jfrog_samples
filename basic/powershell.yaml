@@ -146,7 +146,7 @@ pipelines:
             - dotnet --version
             - try { write-output "foo is $foo"; $foo = "asdf"} catch {$_} finally {write-output "foo is $foo"}
             - try { write-output "hello is $hello"; $hello = "asdf"} catch {$_} finally {write-output "hello is $hello"}
-            - try { send_notification aidan_jira } catch {$_}
+            - try { send_notification aidan_jira -project-id "PIP" } catch {$_}
             - Get-Variable | format-table
           onComplete:
             - try { send_notification aidan_email -recipients "john@shippable.com"} catch {$_}
