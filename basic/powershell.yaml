@@ -621,7 +621,7 @@ pipelines:
             - try { get-childitem $step_workspace_dir\download\cache\myDirs } catch {$_}
             - try { get-childitem $step_workspace_dir\download\cache\myFiles } catch {$_}
             - try { get-childitem $step_workspace_dir\download\cache\myMixed } catch {$_}
-            - add_run_variable "testvariable=asdffdjksfjk"
+            - add_run_variables "testvariable=asdffdjksfjk"
 
 
 
