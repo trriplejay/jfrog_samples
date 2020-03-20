@@ -770,7 +770,7 @@ pipelines:
           integrations:
             - name: johns_art
           sourceLocation: .
-          outputLocation: ${step_workspace_dir}
+          outputLocation: ${step_tmp_dir}
           outputFile: result
           repository: go_stuff
           inputResources:
