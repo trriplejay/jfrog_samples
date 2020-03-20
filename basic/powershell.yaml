@@ -776,6 +776,11 @@ pipelines:
           inputResources:
             - name: golang_repo
               trigger: false
+        execution:
+          onStart:
+            - get-childitem $step_workspace_dir
+          onComplete:
+            - get-childitem $step_workspace_dir
 
       # - name: pubBin
       #   type: GoPublishBinary
