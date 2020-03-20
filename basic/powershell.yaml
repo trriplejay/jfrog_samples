@@ -778,9 +778,9 @@ pipelines:
               trigger: false
         execution:
           onStart:
-            - get-childitem $step_workspace_dir
+            - get-childitem $step_tmp_dir
           onComplete:
-            - get-childitem $step_workspace_dir
+            - get-childitem $step_tmp_dir/output
 
       # - name: pubBin
       #   type: GoPublishBinary
