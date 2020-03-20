@@ -20,10 +20,10 @@ resources:
       path: trriplejay/jfrog_samples
       gitProvider: tr_github
 
-  - name: golang_repo
+  - name: go_app_repo
     type: GitRepo
     configuration:
-      path: trriplejay/shippable_go_test
+      path: trriplejay/go_app
       gitProvider: tr_github
 
 
@@ -774,7 +774,7 @@ pipelines:
           outputFile: result
           repository: go_stuff
           inputResources:
-            - name: golang_repo
+            - name: go_app_repo
               trigger: false
         execution:
           onStart:
