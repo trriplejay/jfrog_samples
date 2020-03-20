@@ -20,6 +20,12 @@ resources:
       path: trriplejay/jfrog_samples
       gitProvider: tr_github
 
+  - name: golang_repo
+    type: GitRepo
+    configuration:
+      path: trriplejay/shippable_go_test
+      gitProvider: tr_github
+
 
   - name: myBuildInfo
     type: BuildInfo
@@ -707,7 +713,7 @@ pipelines:
 
 ############### native steps  #####################
 
-#--------- docker build
+#--------- docker build/push
   - name: docker_native
     steps:
       - name: build
@@ -754,3 +760,30 @@ pipelines:
             # - docker push "${build_dockerImageName}:${build_dockerImageTag}"
             - ls "$env:TEMP"
             - ls "$env:TEMP\jfrog"
+
+#--------- go build/publish
+  - name: go_native
+    steps:
+      - name: build
+        type: GoBuild
+        configuration:
+          integrations:
+            - name: johns_art
+          sourceLocation: .
+          outputLocation: ${step_workspace_dir}
+          outputFile: result
+          repository: go_stuff
+          inputResources:
+            - name: golang_repo
+              trigger: false
+
+      # - name: pubBin
+      #   type: GoPublishBinary
+      #   configuration:
+      #     inputSteps:
+      #       - name: build
+      # - name: pubMod
+      #   type: GoPublishModule
+      #   configuration:
+      #     inputSteps:
+      #       - name: build
