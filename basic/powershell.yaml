@@ -792,3 +792,10 @@ pipelines:
       #   configuration:
       #     inputSteps:
       #       - name: build
+  - name: dummy_bash
+    steps:
+      - name: dummy_bash
+        type: Bash
+        execution:
+          onExecute:
+            - echo "dummy"
