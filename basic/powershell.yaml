@@ -825,7 +825,7 @@ pipelines:
         type: HelmDeploy
         configuration:
           integrations:
-            - name: tr_kubernetes
+            - name: johns_kube
           inputResources:
             - name: simplehelmChart
             - name: simplehelmDockerImage
