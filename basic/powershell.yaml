@@ -121,7 +121,7 @@ resources:
       gitProvider: tr_github
       path: trriplejay/simplehelm
       branches:
-        include: ^master$
+        include: ^windows$
       files:
         include: "simplehelm.*"
 
