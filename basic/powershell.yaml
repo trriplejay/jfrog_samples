@@ -120,6 +120,8 @@ resources:
     configuration:
       gitProvider: tr_github
       path: trriplejay/simplehelm
+      branches:
+        include: ^master$
       files:
         include: "simplehelm.*"
 
@@ -128,6 +130,8 @@ resources:
     configuration:
       gitProvider: tr_github
       path: trriplejay/simplehelm
+      branches:
+        include: ^windows$
       files:
         include: "Dockerfile|server.js|package.json"
 
@@ -794,6 +798,7 @@ pipelines:
             - ls "$env:TEMP"
             - ls "$env:TEMP\jfrog"
 
+#--------------- Helm publish/deploy
   - name: helm_native
     steps:
       - name: dockerBuildPushP
