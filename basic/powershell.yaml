@@ -105,7 +105,40 @@ resources:
       parameters: "hello=world"
 ############ END HOOKS hmac
 
+############# HELM STUFF
 
+  - name: simplehelmChart
+    type: HelmChart
+    configuration:
+      sourceArtifactory: johns_art
+      repository: simplecharts
+      chart: simplehelm
+      version: 0.0.0
+
+  - name: simplehelmRepo_chart
+    type: GitRepo
+    configuration:
+      gitProvider: tr_github
+      path: trriplejay/simplehelm
+      files:
+        include: "simplehelm.*"
+
+  - name: simplehelmRepo_docker
+    type: GitRepo
+    configuration:
+      gitProvider: tr_github
+      path: trriplejay/simplehelm
+      files:
+        include: "Dockerfile|server.js|package.json"
+
+  - name: simplehelmDockerImage
+    type: Image
+    configuration:
+      registry: johns_docker
+      imageName: trriplejay/simplehelm
+      imageTag: latest
+
+############# END HELM STUFF
 
 
 
@@ -760,6 +793,46 @@ pipelines:
             # - docker push "${build_dockerImageName}:${build_dockerImageTag}"
             - ls "$env:TEMP"
             - ls "$env:TEMP\jfrog"
+
+  - name: helm_native
+    steps:
+      - name: dockerBuildPush
+        type: Bash
+        configuration:
+          integrations:
+            - name: tr_docker
+          inputResources:
+            - name: simplehelmRepo_docker
+          outputResources:
+            - name: simplehelmDockerImage
+        execution:
+          onExecute:
+            - pushd $res_simplehelmRepo_docker_resourcePath
+            - docker build -t trriplejay/simplehelm:$run_number .
+            - docker push trriplejay/simplehelm:$run_number
+            - write_output simplehelmDockerImage "imageTag=$run_number"
+
+      - name: publish_helm_chart
+        type: HelmPublish
+        configuration:
+          inputResources:
+            - name: simplehelmRepo_chart
+          outputResources:
+            - name: simplehelmChart
+          chartPath: ./simplehelm
+
+      - name: deploy_helm_chart
+        type: HelmDeploy
+        configuration:
+          integrations:
+            - name: tr_kubernetes
+          inputResources:
+            - name: simplehelmChart
+            - name: simplehelmDockerImage
+          releaseName: simplehelm
+          flags: "--namespace dev"
+          valueFilePaths:
+            - values.yaml
 
 #--------- go build/publish
   - name: go_native
