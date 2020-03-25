@@ -796,8 +796,8 @@ pipelines:
 
   - name: helm_native
     steps:
-      - name: dockerBuildPush
-        type: Bash
+      - name: dockerBuildPushP
+        type: PowerShell
         configuration:
           integrations:
             - name: tr_docker
@@ -807,7 +807,7 @@ pipelines:
             - name: simplehelmDockerImage
         execution:
           onExecute:
-            - pushd $res_simplehelmRepo_docker_resourcePath
+            - Push-Location $res_simplehelmRepo_docker_resourcePath
             - docker build -t trriplejay/simplehelm:$run_number .
             - docker push trriplejay/simplehelm:$run_number
             - write_output simplehelmDockerImage "imageTag=$run_number"
