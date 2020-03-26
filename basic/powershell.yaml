@@ -857,7 +857,7 @@ pipelines:
             - name: simplehelmRepo_chart
           releaseName: simplehelm
           chartPath: "simplehelm"
-          flags: "--namespace dev --atomic"
+          flags: "--namespace repo --atomic"
           dryRun: true
           test: true
           testFlags: "--cleanup --logs"
