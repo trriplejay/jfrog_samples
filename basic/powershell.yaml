@@ -838,6 +838,9 @@ pipelines:
           flags: "--namespace dev"
           valueFilePaths:
             - values.yaml
+        execution:
+          onStart:
+            - get-variable | format-table
 
 #--------- go build/publish
   - name: go_native
