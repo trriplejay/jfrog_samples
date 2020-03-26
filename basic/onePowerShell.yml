@@ -1,0 +1,8 @@
+pipelines:
+  - name: powershell_example
+    steps:
+      - name: simple_step
+        type: PowerShell
+        execution:
+          onExecute:
+            - Write-Output "hello world!"
