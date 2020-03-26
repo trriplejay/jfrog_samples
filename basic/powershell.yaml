@@ -840,12 +840,35 @@ pipelines:
           test: true
           testFlags: "--cleanup --logs"
           lint: true
-          lintFlags: "--strict"
+          # lintFlags: "--strict"
           valueFilePaths:
             - values.yaml
         execution:
           onStart:
             - get-variable | format-table
+  - name: helm_repo
+    steps:
+      - name: deploy_helm_chart
+        type: HelmDeploy
+        configuration:
+          integrations:
+            - name: johns_kube
+          inputResources:
+            - name: simplehelmRepo_chart
+          releaseName: simplehelm
+          chartPath: "simplehelm"
+          flags: "--namespace dev --atomic"
+          dryRun: true
+          test: true
+          testFlags: "--cleanup --logs"
+          lint: true
+          # lintFlags: "--strict"
+          valueFilePaths:
+            - values.yaml
+        execution:
+          onStart:
+            - get-variable | format-table
+
 
 #--------- go build/publish
   - name: go_native
