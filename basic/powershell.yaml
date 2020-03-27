@@ -176,6 +176,7 @@ pipelines:
             - name: aidan_slack
             - name: aidan_email
             - name: aidan_jira
+            - name: johns_azure
           inputResources:
             - name: myRepo
               trigger: false
