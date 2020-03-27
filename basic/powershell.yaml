@@ -39,7 +39,7 @@ resources:
     configuration:
       sourceArtifactory: johns_art
       target: state_data
-      pattern: "pipelines_1582673347/projects/*"
+      pattern: "pipelines_1584860370/projects/*"
       recursive: true
       flat: false
       limit: 5
