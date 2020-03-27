@@ -13,6 +13,7 @@ resources:
       sourceRepository: buildimages
       imageName: 35.238.69.200:8082/buildimages/w19base
       imageTag: latest
+      autoPull: false
 
   - name: myRepo
     type: GitRepo
