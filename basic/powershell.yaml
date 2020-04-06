@@ -738,17 +738,10 @@ pipelines:
             - 'get-childitem env:'
             - get-variable | format-table
             - write-output "path is $env:Path"
-            - write-output "docker host is $env:DOCKER_HOST"
             - write-output "docker dir is $env:DOCKER_DIR"
-            - docker ps -a
-            - docker images
-            - docker version
-            - choco install -y which
-            - write-output "path is $env:Path"
-            - docker ps -a
-            - refreshenv
-            - write-output "path is $env:Path"
-            - docker ps -a
+            - New-Item -ItemType File -Value "hello world" -Path "c:\test\my\file\path\length\by\using\lots\of\characters\itneeds\tobehigher\than\twohundred\andsixty\inorder\torequire\theenablement\oflongfile\paths\thoughdoingso\onthehost\doesnotseem\tomatter\wowthis\seemssolong\yetimbarelyover\twohundred\atthispoint\icanseewhy
+            intheearlydays\windowsdevsmay\havethoughtthat\longerwasunreasonable\butjeez\thisis\twentytwenty\getwith\thetimes\please"
+
 
 ############### native steps  #####################
 
