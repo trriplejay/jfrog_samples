@@ -5,6 +5,7 @@ resources:
       registry: tr_docker
       imageName: trriplejay/simpleserver
       imageTag: latest
+      autoPull: false
 
   - name: myBaseImage
     type: Image
