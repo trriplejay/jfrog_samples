@@ -741,7 +741,7 @@ pipelines:
             - write-output "docker dir is $env:DOCKER_DIR"
             # - Set-ItemProperty 'HKLM:\System\CurrentControlSet\Control\FileSystem' -Name 'LongPathsEnabled' -value 1
             - New-Item -ItemType Directory -Value "hello world" -Path "\\?\c:\test\my\file\path\length\by\using\lots\of\characters\itneeds\tobehigher\than\twohundred\andsixty\inorder\torequire\theenablement\oflongfile\paths\thoughdoingso\onthehost\doesnotseem\tomatter\wowthis\seemssolong\yetimbarelyover\twohundred\atthispoint\icanseewhy\intheearlydays\windowsdevsmay\havethoughtthat\longerwasunreasonable\butjeez\thisis\twentytwenty\getwith\thetimes\please\"
-            - New-Item -ItemType Directory -Value "blah" -Path "$step_workspace_dir\test\my\file\path\length\by\using\lots\of\characters\itneeds\tobehigher\than\twohundred\andsixty\inorder\torequire\theenablement\oflongfile\paths\thoughdoingso\onthehost\doesnotseem\tomatter\wowthis\seemssolong\yetimbarelyover\twohundred\atthispoint\"
+            - New-Item -ItemType Directory -Value "blah" -Path "\\?\$step_workspace_dir\test\my\file\path\length\by\using\lots\of\characters\itneeds\tobehigher\than\twohundred\andsixty\inorder\torequire\theenablement\oflongfile\paths\thoughdoingso\onthehost\doesnotseem\tomatter\wowthis\seemssolong\yetimbarelyover\twohundred\atthispoint\"
 
 
 ############### native steps  #####################
