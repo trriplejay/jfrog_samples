@@ -11,7 +11,7 @@ resources:
     configuration:
       registry: johns_art
       sourceRepository: buildimages
-      imageName: 35.223.134.117:8082/buildimages/w19base
+      imageName: 35.238.69.200:8082/buildimages/w19base
       imageTag: latest
       autoPull: false
 
@@ -739,7 +739,6 @@ pipelines:
             - get-variable | format-table
             - write-output "path is $env:Path"
             - write-output "docker dir is $env:DOCKER_DIR"
-            - Set-ItemProperty 'HKLM:\System\CurrentControlSet\Control\FileSystem' -Name 'LongPathsEnabled' -value 1
             - New-Item -ItemType File -Value "hello world" -Path "c:\test\my\file\path\length\by\using\lots\of\characters\itneeds\tobehigher\than\twohundred\andsixty\inorder\torequire\theenablement\oflongfile\paths\thoughdoingso\onthehost\doesnotseem\tomatter\wowthis\seemssolong\yetimbarelyover\twohundred\atthispoint\icanseewhy\intheearlydays\windowsdevsmay\havethoughtthat\longerwasunreasonable\butjeez\thisis\twentytwenty\getwith\thetimes\please"
 
 
