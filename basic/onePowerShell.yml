@@ -23,4 +23,4 @@ pipelines:
             - try { nssm status pipelines-reqkick } catch { $_ }
             - cat $env:PROGRAMDATA\jfrog\pipelines\seeker\pipelines-seeker.err
             - cat $env:PROGRAMDATA\jfrog\pipelines\seeker\pipelines-seeker.out
-            - cat $env:SYSTEMDRIVE\azureData\customData.bin
+            - get-childitem $env:SYSTEMDRIVE\azureData
