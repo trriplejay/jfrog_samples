@@ -13,6 +13,8 @@ pipelines:
       - name: simple_step
         type: PowerShell
         configuration:
+          inputResources:
+            - name: myrepo
           nodePool: win-static
         execution:
           onExecute:
@@ -20,6 +22,9 @@ pipelines:
       - name: host_step
         type: PowerShell
         configuration:
+          inputResources:
+            - name: myrepo
+              trigger: false
           inputSteps:
             - name: simple_step
           runtime:
