@@ -11,6 +11,8 @@ pipelines:
       - name: host_step
         type: PowerShell
         configuration:
+          inputSteps:
+            - name: simple_step
           runtime:
             type: host
           nodePool: win-static
