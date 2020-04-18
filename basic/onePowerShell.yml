@@ -8,3 +8,17 @@ pipelines:
         execution:
           onExecute:
             - Write-Output "hello world!"
+      - name: host_step
+        type: PowerShell
+        configuration:
+          runtime:
+            type: host
+          nodePool: win-static
+        execution:
+          onExecute:
+            - get-childitem $env:PROGRAMDATA
+            - try { nssm status pipelines-seeker } catch { $_ }
+            - try { nssm status pipelines-reqkick } catch { $_ }
+            - cat $env:PROGRAMDATA\jfrog\pipelines\seeker\pipelines-seeker.err
+            - cat $env:PROGRAMDATA\jfrog\pipelines\seeker\pipelines-seeker.out
+            - cat $env:SYSTEMDRIVE\azureData\customData.bin
