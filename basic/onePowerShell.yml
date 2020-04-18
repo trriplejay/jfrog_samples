@@ -15,7 +15,7 @@ pipelines:
         configuration:
           inputResources:
             - name: myrepo
-          nodePool: win-static
+          nodePool: win-dyna-azure
         execution:
           onExecute:
             - Write-Output "hello world!"
@@ -29,7 +29,7 @@ pipelines:
             - name: simple_step
           runtime:
             type: host
-          nodePool: win-static
+          nodePool: win-dyna-azure
         execution:
           onExecute:
             - get-childitem $env:PROGRAMDATA
