@@ -38,5 +38,4 @@ pipelines:
             - cat $env:PROGRAMDATA\jfrog\pipelines\seeker\pipelines-seeker.err
             - cat $env:PROGRAMDATA\jfrog\pipelines\seeker\pipelines-seeker.out
             - get-childitem $env:SYSTEMDRIVE\azureData
-            - "$global:driveC = Get-PSDrive C"
-            - "[math]::Round($global:driveC.Used * 100 / ($global:driveC.Free + $global:driveC.Used))"
+            - Get-PSDrive C
