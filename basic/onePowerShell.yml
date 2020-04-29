@@ -6,7 +6,7 @@ resources:
       path: trriplejay/jfrog_samples
       branches:
         include: ^master$
-        
+
 pipelines:
   - name: powershell_example
     steps:
@@ -15,10 +15,11 @@ pipelines:
         configuration:
           inputResources:
             - name: myrepo
-          nodePool: win-dyna-azure
+          nodePool: win-dyna-aws
         execution:
           onExecute:
             - Write-Output "hello world!"
+            - jfrog --version
       - name: host_step
         type: PowerShell
         configuration:
@@ -29,13 +30,14 @@ pipelines:
             - name: simple_step
           runtime:
             type: host
-          nodePool: win-dyna-azure
+          nodePool: win-dyna-aws
         execution:
           onExecute:
             - get-childitem $env:PROGRAMDATA
-            - try { nssm status pipelines-seeker } catch { $_ }
+            # - try { nssm status pipelines-seeker } catch { $_ }  azure only
             - try { nssm status pipelines-reqkick } catch { $_ }
-            - cat $env:PROGRAMDATA\jfrog\pipelines\seeker\pipelines-seeker.err
-            - cat $env:PROGRAMDATA\jfrog\pipelines\seeker\pipelines-seeker.out
-            - get-childitem $env:SYSTEMDRIVE\azureData
+            # - cat $env:PROGRAMDATA\jfrog\pipelines\seeker\pipelines-seeker.err azure only
+            # - cat $env:PROGRAMDATA\jfrog\pipelines\seeker\pipelines-seeker.out azure only
+            # - get-childitem $env:SYSTEMDRIVE\azureData azure only
+            - jfrog --version
             - Get-PSDrive C
