@@ -15,7 +15,7 @@ pipelines:
         configuration:
           inputResources:
             - name: myrepo
-          nodePool: win-dyna-aws
+          nodePool: win-dyna-test
         execution:
           onExecute:
             - Write-Output "hello world!"
@@ -30,12 +30,13 @@ pipelines:
             - name: simple_step
           runtime:
             type: host
-          nodePool: win-dyna-aws
+          nodePool: win-dyna-test
         execution:
           onExecute:
             - get-childitem $env:PROGRAMDATA
             # - try { nssm status pipelines-seeker } catch { $_ }  azure only
             - try { nssm status pipelines-reqkick } catch { $_ }
+            - try {  Get-WindowsOptionalFeature -FeatureName Microsoft-Hyper-V-All -Online } catch {$_}
             # - cat $env:PROGRAMDATA\jfrog\pipelines\seeker\pipelines-seeker.err azure only
             # - cat $env:PROGRAMDATA\jfrog\pipelines\seeker\pipelines-seeker.out azure only
             # - get-childitem $env:SYSTEMDRIVE\azureData azure only
