@@ -43,30 +43,30 @@ pipelines:
         execution:
           onExecute:
             - sleep 60
-      - name: p3
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: starter
-        execution:
-          onExecute:
-            - sleep 60
-      - name: p4
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: starter
-        execution:
-          onExecute:
-            - sleep 60
-      - name: p5
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: starter
-        execution:
-          onExecute:
-            - sleep 60
+      # - name: p3
+      #   type: Bash
+      #   configuration:
+      #     inputSteps:
+      #       - name: starter
+      #   execution:
+      #     onExecute:
+      #       - sleep 60
+      # - name: p4
+      #   type: Bash
+      #   configuration:
+      #     inputSteps:
+      #       - name: starter
+      #   execution:
+      #     onExecute:
+      #       - sleep 60
+      # - name: p5
+      #   type: Bash
+      #   configuration:
+      #     inputSteps:
+      #       - name: starter
+      #   execution:
+      #     onExecute:
+      #       - sleep 60
 
       - name: serial_1
         type: Bash
@@ -74,9 +74,9 @@ pipelines:
           inputSteps:
             - name: p1
             - name: p2
-            - name: p3
-            - name: p4
-            - name: p5
+            # - name: p3
+            # - name: p4
+            # - name: p5
         execution:
           onExecute:
             - sleep 60
@@ -144,82 +144,82 @@ pipelines:
         execution:
           onExecute:
             - sleep 60
-      - name: serial_1B
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: p1
-            - name: p2
-            - name: p3
-            - name: p4
-            - name: p5
-        execution:
-          onExecute:
-            - sleep 60
-      - name: serial_2B
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: serial_1B
-        execution:
-          onExecute:
-            - sleep 60
-      - name: serial_3B
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: serial_2B
-        execution:
-          onExecute:
-            - sleep 60
-      - name: serial_4B
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: serial_3B
-        execution:
-          onExecute:
-            - sleep 60
-      - name: serial_5B
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: serial_4B
-        execution:
-          onExecute:
-            - sleep 60
-      - name: serial_6B
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: serial_5B
-        execution:
-          onExecute:
-            - sleep 60
-      - name: serial_7B
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: serial_6B
-        execution:
-          onExecute:
-            - sleep 60
-      - name: serial_8B
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: serial_7B
-        execution:
-          onExecute:
-            - sleep 60
-      - name: serial_9B
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: serial_8B
-        execution:
-          onExecute:
-            - sleep 60
+      # - name: serial_1B
+      #   type: Bash
+      #   configuration:
+      #     inputSteps:
+      #       - name: p1
+      #       - name: p2
+      #       - name: p3
+      #       - name: p4
+      #       - name: p5
+      #   execution:
+      #     onExecute:
+      #       - sleep 60
+      # - name: serial_2B
+      #   type: Bash
+      #   configuration:
+      #     inputSteps:
+      #       - name: serial_1B
+      #   execution:
+      #     onExecute:
+      #       - sleep 60
+      # - name: serial_3B
+      #   type: Bash
+      #   configuration:
+      #     inputSteps:
+      #       - name: serial_2B
+      #   execution:
+      #     onExecute:
+      #       - sleep 60
+      # - name: serial_4B
+      #   type: Bash
+      #   configuration:
+      #     inputSteps:
+      #       - name: serial_3B
+      #   execution:
+      #     onExecute:
+      #       - sleep 60
+      # - name: serial_5B
+      #   type: Bash
+      #   configuration:
+      #     inputSteps:
+      #       - name: serial_4B
+      #   execution:
+      #     onExecute:
+      #       - sleep 60
+      # - name: serial_6B
+      #   type: Bash
+      #   configuration:
+      #     inputSteps:
+      #       - name: serial_5B
+      #   execution:
+      #     onExecute:
+      #       - sleep 60
+      # - name: serial_7B
+      #   type: Bash
+      #   configuration:
+      #     inputSteps:
+      #       - name: serial_6B
+      #   execution:
+      #     onExecute:
+      #       - sleep 60
+      # - name: serial_8B
+      #   type: Bash
+      #   configuration:
+      #     inputSteps:
+      #       - name: serial_7B
+      #   execution:
+      #     onExecute:
+      #       - sleep 60
+      # - name: serial_9B
+      #   type: Bash
+      #   configuration:
+      #     inputSteps:
+      #       - name: serial_8B
+      #   execution:
+      #     onExecute:
+      #       - sleep 60
 
 
 
