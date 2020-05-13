@@ -30,7 +30,7 @@ pipelines:
             - name: simple_step
           runtime:
             type: host
-          nodePool: win-dyna-test
+          nodePool: win-dyna-default
         execution:
           onExecute:
             - get-childitem $env:PROGRAMDATA
