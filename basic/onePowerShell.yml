@@ -15,7 +15,6 @@ pipelines:
         configuration:
           inputResources:
             - name: myrepo
-          nodePool: win-dyna-test
         execution:
           onExecute:
             - Write-Output "hello world!"
