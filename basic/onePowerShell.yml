@@ -13,6 +13,7 @@ pipelines:
       - name: simple_step
         type: PowerShell
         configuration:
+          nodePool: win-dyna-default
           inputResources:
             - name: myrepo
         execution:
