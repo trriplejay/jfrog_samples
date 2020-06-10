@@ -27,6 +27,7 @@ pipelines:
           jenkinsJobName: jfrog_samples
           buildParameters:
             foo: bar
+            runNumber: ${run_number}
           integrations:
             - name: johns_jenkins
           # inputSteps:
