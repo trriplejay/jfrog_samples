@@ -13,7 +13,7 @@ pipelines:
       - name: simple_step
         type: PowerShell
         configuration:
-          nodePool: win-dyna-default
+          nodePool: win_2019
           inputResources:
             - name: myrepo
         execution:
@@ -30,7 +30,7 @@ pipelines:
             - name: simple_step
           runtime:
             type: host
-          nodePool: win-dyna-default
+          nodePool: win_2019
         execution:
           onExecute:
             - get-childitem $env:PROGRAMDATA
