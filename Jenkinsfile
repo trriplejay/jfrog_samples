@@ -7,6 +7,7 @@ pipeline {
         stage('build') {
             steps {
                 sh 'npm --version'
+                echo "RunNumber sent from pipelines is: ${params.runNumber}"
             }
         }
     }
