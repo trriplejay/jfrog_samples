@@ -24,7 +24,7 @@ pipelines:
       - name: jenkinsStep
         type: Jenkins
         configuration:
-          jenkinsJobName: blah
+          jenkinsJobName: jfrog_samples
           buildParameters:
             foo: bar
           integrations:
