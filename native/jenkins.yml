@@ -25,7 +25,7 @@ pipelines:
         type: Jenkins
         configuration:
           jenkinsJobName: jfrog_samples
-          jenkinsBranchName: {{gitBranch}}
+          # jenkinsBranchName: {{gitBranch}}
           buildParameters:
             foo: bar
             runNumber: ${run_number}
