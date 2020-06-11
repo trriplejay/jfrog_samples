@@ -39,7 +39,7 @@ pipelines:
         type: Jenkins
         configuration:
           jenkinsJobName: mb_test
-          # jenkinsBranchName: {{gitBranch}}
+          jenkinsBranchName: {{gitBranch}}
           buildParameters:
             foo: bar
             runNumber: ${run_number}
