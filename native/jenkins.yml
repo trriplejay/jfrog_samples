@@ -35,6 +35,20 @@ pipelines:
           #   - name: firstStep
           outputResources:
             - name: johns_jenkins_output
+      - name: jenkinsMBStep
+        type: Jenkins
+        configuration:
+          jenkinsJobName: mb_test
+          # jenkinsBranchName: {{gitBranch}}
+          buildParameters:
+            foo: bar
+            runNumber: ${run_number}
+          integrations:
+            - name: johns_jenkins
+          # inputSteps:
+          #   - name: firstStep
+          outputResources:
+            - name: johns_jenkins_output
 
       # - name: lastStep
       #   type: Bash
