@@ -1,3 +1,4 @@
+resources:
   - name: matrix_property_bag_in
     type: PropertyBag
     configuration:
