@@ -4,14 +4,14 @@ resources:
     configuration:
       jenkinsvalue: original
 
-  - name: johns_jenkins_incomingHook
-    type: IncomingWebhook
-    configuration:
-      webhookName: johns_incoming
-  - name: johns_jenkins_outgoingHook
-    type: OutgoingWebhook
-    configuration:
-      webhookName: johns_outgoing
+#   - name: johns_jenkins_incomingHook
+#     type: IncomingWebhook
+#     configuration:
+#       webhookName: johns_incoming
+#   - name: johns_jenkins_outgoingHook
+#     type: OutgoingWebhook
+#     configuration:
+#       webhookName: johns_outgoing
 
 pipelines:
   - name: john_jenkins_support
