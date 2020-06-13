@@ -1,0 +1,83 @@
+  - name: matrix_property_bag_in
+    type: PropertyBag
+    configuration:
+      key1: value1
+      key2: value2
+
+  - name: matrix_property_bag_out
+    type: PropertyBag
+    configuration:
+      key1: value1
+
+pipelines:
+  - name: Pipeline
+    steps:
+      - name: Normal_Step
+        type: Bash
+        execution:
+          onExecute:
+            - echo "Passed"
+            - popd
+
+      - name: Matrix_Fan_Out_1
+        type: FanOut
+        configuration:
+          inputSteps:
+            - name: Normal_Step
+        execution:
+          onExecute:
+            - echo "I am on fan out step"
+            - touch fan_out.txt
+            - set_step_var fan_out value1
+            - echo "Fan out working" > fan_out_1.txt
+
+      - name: matrix_2
+        type: Matrix
+        stepMode: Bash
+        configuration:
+          inputSteps:
+            - name: Matrix_Fan_Out_1
+        stepletMultipliers:
+          environmentVariables:
+            - delay: 1
+              fail: 'true'
+            - delay: 10
+              fail: 'true'
+            - delay: 15
+              fail: 'false'
+            - delay: 20
+              fail: 'false'
+        execution:
+          onStart:
+            - sleep "$delay"
+          onExecute:
+            - echo "I am on matrix step"
+            - |
+              [ $fail == 'false' ]
+            - ls -l .
+
+        fastFail: true
+
+        allowFailures:
+          - environmentVariables:
+              delay: 1
+              fail: 'true'
+
+        exclude:
+          - environmentVariables:
+              delay: 10
+              fail: 'true'
+
+      - name: Matrix_Fan_In
+        type: FanIn
+        configuration:
+          inputSteps:
+            - name: matrix_2
+        execution:
+          onExecute:
+            - echo "Hello World"
+            - ls -l .
+            - ls -l ./matrix_2
+            - ls -l ./matrix_2/Matrix_Fan_Out_1/
+            - get_step_var matrix_2 test_key
+            - get_step_var matrix_2 addresses
