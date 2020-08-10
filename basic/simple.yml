@@ -20,7 +20,7 @@ pipelines:
             image:
               custom:
                 name: library/ubuntu
-                tag: 18.04
+                tag: "18.04"
         execution:
           onExecute:
             - bash --version
