@@ -3,7 +3,7 @@ resources:
     type: GitRepo
     configuration:
       gitProvider: johns_github
-      path: trriplejay/step_samples
+      path: trriplejay/jfrog_samples
       branches:
         include: master
 
