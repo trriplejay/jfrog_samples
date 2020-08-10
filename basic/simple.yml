@@ -19,6 +19,7 @@ pipelines:
           onExecute:
             - bash --version
             - echo "pipeline source branch is - {{gitBranch}}"
+            - add_run_variables "value=password123"
 
       - name: second_step_simple
         type: Bash
@@ -28,5 +29,6 @@ pipelines:
         execution:
           onExecute:
             - echo "final step in the pipeline"
+            - echo "my password is $value"
 
 
