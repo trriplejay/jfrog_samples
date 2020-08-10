@@ -2,8 +2,8 @@ resources:
   - name: singleRepo_simple
     type: GitRepo
     configuration:
-      gitProvider: johns_bbs
-      path: ~johns/simpleserver
+      gitProvider: johns_github
+      path: trriplejay/step_samples
       branches:
         include: master
 
@@ -15,13 +15,6 @@ pipelines:
         configuration:
           inputResources:
             - name: singleRepo_simple
-          runtime:
-            type: image
-            image:
-              custom:
-                name: docker.bintray.io/jfrog/pipelines-u18node
-                tag: 10.16.3
-                autoPull: false
         execution:
           onExecute:
             - bash --version
