@@ -19,8 +19,8 @@ pipelines:
             type: image
             image:
               custom:
-                name: library/ubuntu
-                tag: "18.04"
+                name: trriplejay/testu18
+                tag: latest
         execution:
           onExecute:
             - bash --version
