@@ -1,0 +1,11 @@
+
+
+pipelines:
+  - name: insecreg_test
+    steps:
+      - name: check_docker_info
+        type: Bash
+
+        execution:
+          onExecute:
+            - docker info
