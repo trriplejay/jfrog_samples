@@ -3,6 +3,10 @@ resources:
     type: PropertyBag
     configuration:
       hello: world
+  - name: myPrioBag
+    type: PropertyBag
+    configuration:
+      hello: world2
 
 
 pipelines:
@@ -34,6 +38,8 @@ pipelines:
         configuration:
           inputResources:
             - name: myBag
+          outputResources:
+            - name: myPrioBag
         execution:
           onExecute:
             - echo "runNumber is ${res_myBag_runNumber}"
@@ -55,3 +61,10 @@ pipelines:
         execution:
           onExecute:
             - echo "runNumber is ${res_myBag_runNumber}"
+
+      - name: prioStep1
+        type: Bash
+        configuration:
+          priority: 1
+          inputResources:
+            - name: myPrioBag
