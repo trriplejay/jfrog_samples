@@ -3,38 +3,98 @@ resources:
     type: GitRepo
     configuration:
       gitProvider: johns_github
-      path: trriplejay/jfrog_samples
+      path: trriplejay/simpleserver
       branches:
         include: master
 
+  # - name: myProps
+  #   type: PropertyBag
+  #   configuration:
+  #     foo: bar
+  #     hello: world
+
+  - name: startingProps
+    type: PropertyBag
+    configuration:
+      fileprefix: "tomcat"
+      not: again
+  - name: testProps
+    type: propertyBag
+    configuration:
+      zero_run_number_copy: ${res_startingProps_zero_run_number}
+      zero_run_number_copy2: ${zero_run_number}
+  # - name: testSpec
+  #   type: FileSpec
+  #   configuration:
+  #     sourceArtifactory:    johns_art
+  #     pattern: "helm-local/${res_startingProps_fileprefix}*.tgz"
+
 pipelines:
   - name: simple_pipe_simple
+    # configuration:
+    #   nodePool: static-node-pool
     steps:
       - name: first_step_simple
         type: Bash
         configuration:
+          integrations:
+            - name: johns_github
           inputResources:
-            - name: singleRepo_simple
-          runtime:
-            type: image
-            image:
-              custom:
-                name: trriplejay/testu18
-                tag: latest
+            - name: startingProps
+            - name: testProps
+            # - name: testSpec
+          #   - name: singleRepo_simple
+          # outputResources:
+          #   - name: myProps
         execution:
           onExecute:
+            - sleep 10
+            - restore_cache_files state output.txt
+            - restore_pipeline_files state output.txt
             - bash --version
+            # - helm version
+            # - nvm use 10.18.0
+            - node --version
             - echo "pipeline source branch is - {{gitBranch}}"
-            - add_run_variables "value=password123"
+            - echo "hello is $hello"
+            - echo "foo is $foo"
+            # - write_output myProps "fizz=buzz"
+            - echo "hello world $run_number" >> output.txt
+            - add_cache_files output.txt state
+            - add_pipeline_files output.txt state
+            - add_run_variables "message=heeeeeeey"
+            - sleep 10
+            - env | grep zero_run
 
-      - name: second_step_simple
+      # - name: second_step_simple
+      #   type: Bash
+      #   configuration:
+      #     inputResources:
+      #       - name: myProps
+      #   execution:
+      #     onExecute:
+      #       - echo "fizz is $fizz"
+      #       - echo "hello is $hello"
+      #       - echo "foo is $foo"
+      #       - echo "message is $message"
+      - name: third_step_simple
         type: Bash
         configuration:
           inputSteps:
+            # - name: second_step_simple
             - name: first_step_simple
         execution:
           onExecute:
             - echo "final step in the pipeline"
-            - echo "my password is $value"
 
 
+  - name: instigating_pipeline
+    steps:
+      - name: start_it
+        type: Bash
+        configuration:
+          outputResources:
+            - name: startingProps
+        execution:
+          onExecute:
+            - write_output startingProps "zero_run_number=$run_number" "fileprefix=tomcat-0.1"
