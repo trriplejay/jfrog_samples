@@ -68,3 +68,6 @@ pipelines:
           priority: 1
           inputResources:
             - name: myPrioBag
+        execution:
+          onExecute:
+            - echo "blah"
