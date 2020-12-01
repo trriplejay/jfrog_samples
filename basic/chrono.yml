@@ -14,6 +14,7 @@ pipelines:
       - name: chrono_1
         type: Bash
         configuration:
+          chronological: true
           inputResources:
             - name: chrono_repo
         execution:
@@ -22,6 +23,7 @@ pipelines:
       - name: chrono_2
         type: Bash
         configuration:
+          chronological: true
           inputSteps:
             - name: chrono_1
         execution:
@@ -32,6 +34,7 @@ pipelines:
       - name: chrono_3
         type: Bash
         configuration:
+          chronological: true
           inputResources:
             - name: chrono_repo
           inputSteps:
