@@ -28,7 +28,6 @@ pipelines:
             - name: chrono_1
         execution:
           onExecute:
-            - sleep 30
             - echo "second"
 
       - name: chrono_3
@@ -38,7 +37,7 @@ pipelines:
           inputResources:
             - name: chrono_repo
           inputSteps:
-            - name: chrono_2
+            - name: chrono_1
         execution:
           onExecute:
             - echo "third"
