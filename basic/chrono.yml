@@ -1,0 +1,38 @@
+resources:
+  - name: chrono_repo
+    type: GitRepo
+    configuration:
+      gitProvider: johns_github
+      path: trriplejay/jfrog_samples
+      branches:
+        include: master
+
+
+pipelines:
+  - name: chrono_test_crash
+    steps:
+      - name: chrono_1
+        configuration:
+          inputResources:
+            - name: chrono_repo
+        execution:
+          onExecute:
+            - echo "first"
+      - name: chrono_2
+        configuration:
+          inputSteps:
+            - name: chrono_1
+        execution:
+          onExecute:
+            - sleep 30
+            - echo "second"
+
+      - name: chrono_3
+        configuration:
+          inputResources:
+            - name: chrono_repo
+          inputSteps:
+            - name: chrono_2
+        execution:
+          onExecute:
+            - echo "third"
