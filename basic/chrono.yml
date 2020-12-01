@@ -37,7 +37,7 @@ pipelines:
           inputResources:
             - name: chrono_repo
           inputSteps:
-            - name: chrono_1
+            - name: chrono_2
         execution:
           onExecute:
             - echo "third"
