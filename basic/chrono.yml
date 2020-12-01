@@ -12,6 +12,7 @@ pipelines:
   - name: chrono_test_crash
     steps:
       - name: chrono_1
+        type: Bash
         configuration:
           inputResources:
             - name: chrono_repo
@@ -19,6 +20,7 @@ pipelines:
           onExecute:
             - echo "first"
       - name: chrono_2
+        type: Bash
         configuration:
           inputSteps:
             - name: chrono_1
@@ -28,6 +30,7 @@ pipelines:
             - echo "second"
 
       - name: chrono_3
+        type: Bash
         configuration:
           inputResources:
             - name: chrono_repo
