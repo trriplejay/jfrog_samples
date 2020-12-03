@@ -59,6 +59,7 @@ pipelines:
             - echo "hello is $hello"
             - echo "foo is $foo"
             # - write_output myProps "fizz=buzz"
+            - odd=$(($run_number%2))
             - echo "hello world $run_number" >> output.txt
             - if [ "$odd" != 0 ]; then add_cache_files output.txt state; fi
             - add_pipeline_files output.txt state
